@@ -1,10 +1,9 @@
-import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from 'react-hot-toast';
 
-export const metadata: Metadata = {
-  title: 'ZAUQ COLLECTION - Premium Fashion Brand',
-  description: 'Discover luxury fashion at ZAUQ COLLECTION',
+export const metadata = {
+  title: 'ZAUQ COLLECTION',
+  description: 'Premium Fashion Brand',
 };
 
 export default function RootLayout({
@@ -16,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <Toaster position="bottom-right" />
+        <Toaster />
       </body>
     </html>
   );
