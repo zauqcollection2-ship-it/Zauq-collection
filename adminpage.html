@@ -1,0 +1,38 @@
+// app/admin/page.tsx
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
+import { AdminDashboard } from '@/components/admin/AdminDashboard';
+
+export default function AdminPage() {
+  const { user, isAdmin, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/auth/login');
+      return;
+    }
+
+    if (!loading && user && !isAdmin) {
+      router.push('/');
+      return;
+    }
+  }, [user, isAdmin, loading, router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-gold-500 border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return null;
+  }
+
+  return <AdminDashboard />;
+}

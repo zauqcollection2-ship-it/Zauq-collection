@@ -1,0 +1,74 @@
+// components/Home/FeaturedCategories.tsx
+'use client';
+
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { CategoryCard } from '@/components/CategoryCard';
+
+const categories = [
+  {
+    id: '1',
+    name: 'Men\'s Collection',
+    image: '/images/categories/men.jpg',
+    href: '/category/men',
+    count: 124,
+  },
+  {
+    id: '2',
+    name: 'Women\'s Collection',
+    image: '/images/categories/women.jpg',
+    href: '/category/women',
+    count: 156,
+  },
+  {
+    id: '3',
+    name: 'New Arrivals',
+    image: '/images/categories/new-arrivals.jpg',
+    href: '/new-arrivals',
+    count: 45,
+  },
+  {
+    id: '4',
+    name: 'Best Sellers',
+    image: '/images/categories/best-sellers.jpg',
+    href: '/best-sellers',
+    count: 32,
+  },
+];
+
+export function FeaturedCategories() {
+  return (
+    <section className="py-20 bg-matte-black">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="section-title">
+            Explore Our <span className="text-gradient">Collections</span>
+          </h2>
+          <p className="section-subtitle">
+            Discover the latest trends in premium Pakistani fashion
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {categories.map((category, index) => (
+            <motion.div
+              key={category.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <CategoryCard category={category} />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

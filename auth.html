@@ -1,0 +1,100 @@
+// lib/auth/auth.ts
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  User,
+  updateProfile,
+  sendEmailVerification,
+} from 'firebase/auth';
+import { auth } from '../firebase/config';
+import { FirestoreService, COLLECTIONS } from '../firebase/firestore';
+
+export const AuthService = {
+  async register(email: string, password: string, displayName: string) {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    
+    // Update profile
+    await updateProfile(userCredential.user, { displayName });
+    
+    // Create user document
+    await FirestoreService.create(COLLECTIONS.USERS, {
+      uid: userCredential.user.uid,
+      email,
+      displayName,
+      role: 'customer',
+      createdAt: new Date(),
+    });
+    
+    return userCredential.user;
+  },
+
+  async login(email: string, password: string) {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    return userCredential.user;
+  },
+
+  async loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    const userCredential = await signInWithPopup(auth, provider);
+    
+    // Check if user exists in Firestore
+    const userData = await FirestoreService.get(COLLECTIONS.USERS, userCredential.user.uid);
+    
+    if (!userData) {
+      await FirestoreService.create(COLLECTIONS.USERS, {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        displayName: userCredential.user.displayName,
+        role: 'customer',
+        createdAt: new Date(),
+      });
+    }
+    
+    return userCredential.user;
+  },
+
+  async logout() {
+    await signOut(auth);
+  },
+
+  async resetPassword(email: string) {
+    await sendPasswordResetEmail(auth, email);
+  },
+
+  async sendVerificationEmail() {
+    if (auth.currentUser) {
+      await sendEmailVerification(auth.currentUser);
+    }
+  },
+
+  getCurrentUser(): User | null {
+    return auth.currentUser;
+  },
+
+  onAuthStateChanged(callback: (user: User | null) => void) {
+    return onAuthStateChanged(auth, callback);
+  },
+
+  async getUserRole(uid: string): Promise<string> {
+    const userDoc = await FirestoreService.get(COLLECTIONS.USERS, uid);
+    return userDoc?.role || 'customer';
+  },
+
+  async isAdmin(uid: string): Promise<boolean> {
+    const userDoc = await FirestoreService.get(COLLECTIONS.USERS, uid);
+    return userDoc?.role === 'admin';
+  },
+};
