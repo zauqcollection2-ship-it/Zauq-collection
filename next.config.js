@@ -1,16 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'firebasestorage.googleapis.com',
-      'lh3.googleusercontent.com',
-      'images.unsplash.com',
-    ],
+    domains: ['firebasestorage.googleapis.com', 'lh3.googleusercontent.com'],
   },
-  swcMinify: true,
-  compress: true,
   reactStrictMode: true,
-  poweredByHeader: false,
-};
+  swcMinify: true,
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
