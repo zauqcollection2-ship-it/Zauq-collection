@@ -1,56 +1,41 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import toast from 'react-hot-toast';
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <header className="fixed top-0 z-50 w-full bg-black/95 backdrop-blur-lg border-b border-white/10">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="text-2xl font-bold">
-              <span className="text-yellow-500">ZAUQ</span>
-              <span className="ml-1 text-sm font-light">COLLECTION</span>
-            </Link>
-
-            <div className="flex items-center space-x-4">
-              <Link href="/auth/login" className="px-4 py-2 bg-yellow-500 text-black rounded-full text-sm font-semibold hover:bg-yellow-400 transition">
-                Sign In
-              </Link>
-              <Link href="/auth/register" className="px-4 py-2 border border-white/30 text-white rounded-full text-sm font-semibold hover:bg-white/10 transition">
-                Sign Up
-              </Link>
-            </div>
-          </div>
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-5xl md:text-7xl font-bold">
+          <span className="text-yellow-500">ZAUQ</span>
+          <br />
+          <span>COLLECTION</span>
+        </h1>
+        <p className="text-gray-400 mt-4 text-lg">Premium Fashion Brand</p>
+        
+        <div className="flex flex-wrap gap-4 justify-center mt-8">
+          <Link 
+            href="/auth/login" 
+            className="px-6 py-2 bg-yellow-500 text-black rounded-full font-semibold hover:bg-yellow-400 transition"
+          >
+            Sign In
+          </Link>
+          <Link 
+            href="/auth/register" 
+            className="px-6 py-2 border border-white/30 text-white rounded-full font-semibold hover:bg-white/10 transition"
+          >
+            Sign Up
+          </Link>
         </div>
-      </header>
 
-      {/* Hero */}
-      <section className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-5xl md:text-7xl font-bold">
-            <span className="text-yellow-500">ZAUQ</span>
-            <br />
-            <span className="text-white">COLLECTION</span>
-          </h1>
-          <p className="text-gray-400 mt-4 text-lg">Premium Fashion Brand</p>
-          <div className="flex flex-wrap justify-center gap-4 mt-8">
-            <Link href="#" className="px-8 py-3 bg-yellow-500 text-black rounded-full font-semibold hover:bg-yellow-400 transition">
-              Shop Now
-            </Link>
-            <Link href="/auth/login" className="px-8 py-3 border border-white/30 text-white rounded-full font-semibold hover:bg-white/10 transition">
-              Sign In
-            </Link>
-          </div>
+        <div className="mt-12 text-sm text-gray-500">
+          <a href="tel:+923490656865" className="hover:text-yellow-500 transition block">
+            📞 0349-0656865
+          </a>
         </div>
-      </section>
+      </div>
 
-      {/* WhatsApp Button */}
+      {/* WhatsApp Floating Button */}
       <a
         href="https://wa.me/923490656865"
         target="_blank"
