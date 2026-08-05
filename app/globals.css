@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #000000;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+.text-gold {
+  color: #C9A84C;
+}
+
+.bg-gold {
+  background: #C9A84C;
+}
+
+.border-gold {
+  border-color: #C9A84C;
+}
+
+.hover-gold:hover {
+  color: #C9A84C;
+}
+
+.hover-bg-gold:hover {
+  background: #C9A84C;
+}
