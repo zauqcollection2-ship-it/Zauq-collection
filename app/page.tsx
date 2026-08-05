@@ -1,4 +1,9 @@
-'use client';
+
+{user?.email === 'zauqcollection2@gmail.com' && (
+  <Link href="/admin" className="px-4 py-2 bg-purple-500 text-white rounded-full text-sm font-semibold hover:bg-purple-600 transition">
+    Admin Panel
+  </Link>
+)}'use client';
 
 import Link from 'next/link';
 import { useState } from 'react';
