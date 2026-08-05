@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/lib/firebase/config';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+
+// Import the auth from our config
+import { auth } from '@/lib/firebase/config';
 
 export default function LoginPage() {
   const router = useRouter();
