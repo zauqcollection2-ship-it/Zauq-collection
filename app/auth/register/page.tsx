@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/lib/firebase/config';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { auth } from '@/lib/firebase/config';
 
 export default function RegisterPage() {
   const router = useRouter();
